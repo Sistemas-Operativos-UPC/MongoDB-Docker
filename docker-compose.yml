@@ -3,7 +3,7 @@ services:
     image: mongo:latest
     container_name: mongodb_container
     ports:
-      - "27017:8085"
+      - "27017:27017"  # Ensure this maps the correct port for MongoDB
     volumes:
       - mongo_data:/data/db
     environment:
@@ -11,6 +11,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     restart: unless-stopped
-
+    env_file:
+      - .env
 volumes:
   mongo_data:
